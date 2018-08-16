@@ -1,5 +1,4 @@
 .idea
 node_modules
-wordpress
 *.min.css
 *.min.js
