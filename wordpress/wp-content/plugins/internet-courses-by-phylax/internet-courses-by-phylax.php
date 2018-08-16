@@ -29,3 +29,23 @@ You should have received a copy of the GNU General Public License along with
 Internet Courses by phylax.pl. If not, see https://wordpress.org/about/license/.
 
 */
+namespace Phylax\IC;
+
+// let's see if we are in the WordPress call
+defined( 'ABSPATH' ) || exit('This file cannot be executed outside the WordPress environment.');
+
+define( __NAMESPACE__ . '\DS', \DIRECTORY_SEPARATOR );
+define( __NAMESPACE__ . '\PLUGIN_DIR', str_replace( [ '\\', '/' ], DS, plugin_dir_path( __FILE__ ) ) );
+
+require_once PLUGIN_DIR . 'Phylax' . DS . 'IC' . DS . 'Autoloader.php';
+
+$ic_autoloader = new Autoloader();
+$ic_autoloader->register();
+if ( TRUE === $ic_autoloader->error ) {
+	// SPL error, we have to quit but we do not have to disrupt WordPress
+	return;
+}
+
+$ic_autoloader->addNamespace(__NAMESPACE__, PLUGIN_DIR . 'Phylax' . DS . 'IC' );
+
+new Plugin();
