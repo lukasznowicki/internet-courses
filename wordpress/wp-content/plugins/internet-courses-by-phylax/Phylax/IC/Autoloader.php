@@ -10,14 +10,13 @@ namespace Phylax\IC;
 class Autoloader {
 
 	/**
-	 * @var array
-	 */
-	protected $namespaces = [];
-
-	/**
 	 * @var bool
 	 */
 	public $error = FALSE;
+	/**
+	 * @var array
+	 */
+	protected $namespaces = [];
 
 	/**
 	 * @return bool
@@ -25,7 +24,7 @@ class Autoloader {
 	public function register() {
 		try {
 			spl_autoload_register( [ $this, 'loadClass' ] );
-		} catch (\Exception $exception) {
+		} catch ( \Exception $exception ) {
 			if ( \WP_DEBUG ) {
 				echo '<p>Runtime error while registering spl autoloader in Internet Courses plugin.</p>';
 			}
